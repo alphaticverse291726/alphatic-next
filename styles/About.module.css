@@ -1,0 +1,2 @@
+.header { position: relative; padding: 100px 0 60px; overflow: hidden; background: var(--bg2); }
+@media (max-width: 768px) { .prGrid { grid-template-columns: 1fr 1fr; } }
