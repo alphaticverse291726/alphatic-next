@@ -16,8 +16,10 @@
   --tx: #F0E8FF;
   --tm: #8B72A8;
   --td: #4A3660;
-  --ff-disp: 'Syne', sans-serif;
-  --ff-body: 'DM Sans', sans-serif;
+
+  /* only these two lines changed */
+  --ff-disp: sans-serif;
+  --ff-body: sans-serif;
 }
 
 [data-theme="light"] {
