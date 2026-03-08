@@ -1,0 +1,15 @@
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; animation: fi .2s ease; padding: 20px; }
+@keyframes fi { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: var(--sf); border: 1px solid var(--bdh); border-radius: 20px; width: 100%; max-width: 500px; padding: 40px; position: relative; box-shadow: 0 0 80px var(--glowb); animation: su .3s ease; }
+@keyframes su { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+.close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; background: var(--sf2); border: 1px solid var(--bd); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--tm); cursor: pointer; font-size: 18px; transition: all .2s; }
+.close:hover { color: var(--tx); border-color: var(--a1); }
+.header { text-align: center; margin-bottom: 28px; }
+.icon { width: 48px; height: 48px; background: var(--grad); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-family: var(--ff-disp); font-size: 22px; font-weight: 800; color: #fff; margin: 0 auto 16px; }
+.header h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.header p { color: var(--tm); font-size: 14px; line-height: 1.7; }
+.form { display: flex; flex-direction: column; gap: 12px; }
+.form input, .form select { background: var(--sf2); border: 1px solid var(--bd); border-radius: 10px; padding: 12px 16px; color: var(--tx); font-size: 14px; font-family: var(--ff-body); outline: none; transition: border-color .2s; width: 100%; }
+.form input:focus, .form select:focus { border-color: var(--a1); }
+.form select option { background: var(--sf2); }
+.note { text-align: center; color: var(--td); font-size: 11px; margin-top: 14px; }
