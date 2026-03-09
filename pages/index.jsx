@@ -1,14 +1,57 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useEffect, useRef } from 'react';
 import { CAPABILITIES, WHY_ALPHATIC, BEFORE_AFTER, DAY_TIMELINE, TESTIMONIALS } from '../lib/data';
 import styles from '../styles/Home.module.css';
 
-// We bubble onTrial up through a context set in _app — for simplicity, pages import a hook
-// Instead, we use a global custom event that Layout listens for
-const openTrial = () => typeof window !== 'undefined' && window.dispatchEvent(new Event('open-trial'));
-
 export default function Home() {
+  const probRef = useRef(null);
+  const timelineRef = useRef(null);
+
+  // Open Tally in a new tab
+  const openTrial = () => {
+    if (typeof window !== 'undefined') {
+      window.open('https://tally.so/r/lbOeYp', '_blank');
+    }
+  };
+
+  useEffect(() => {
+    // ── Animate Problem Cards ──
+    const probCards = probRef.current?.querySelectorAll(`.${styles.probItem}`);
+    const observerProb = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.animate);
+            observerProb.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    probCards?.forEach(card => observerProb.observe(card));
+
+    // ── Animate Timeline Points ──
+    const timelinePoints = timelineRef.current?.querySelectorAll(`.${styles.timeItem}`);
+    const observerTimeline = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fadeIn');
+            observerTimeline.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    timelinePoints?.forEach(point => observerTimeline.observe(point));
+
+    return () => {
+      observerProb.disconnect();
+      observerTimeline.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -21,17 +64,25 @@ export default function Home() {
           <div className="grid-bg" />
           <div className={styles.heroGlow} />
           <div className="wrap">
-            <div className="label"><span className="dot" />Dental is Live · OBGYN & Cardiology Coming Mid-2026</div>
-            <h1 className={styles.heroTitle}>
-              The Operating System<br />for <span className="grad-text">Modern Clinics</span><br />and Hospitals
+            <div className="label">
+              <span className="dot" />Dental is Live · OBGYN & Cardiology Coming Mid-2026
+            </div>
+            <h1 className={`${styles.heroTitle} ${styles.heroHeading}`}>
+              The Operating System<br />
+              for Modern Clinics<br />
+              and Hospitals
             </h1>
             <p className={styles.heroDesc}>
               One platform. Every clinical, operational, and financial function.<br />
               Built for specialists. Deployed to 50+ live clinics today.
             </p>
             <div className={styles.heroBtns}>
-              <button className="btn btn-p btn-lg" onClick={openTrial}>Start Free Trial — 30 Days, No Card</button>
-              <button className="btn btn-o btn-lg" onClick={openTrial}>Schedule 20-Min Walkthrough</button>
+              <button className="btn btn-p btn-lg" onClick={openTrial}>
+                Start Free Trial — 30 Days, No Card
+              </button>
+              <button className="btn btn-o btn-lg" onClick={openTrial}>
+                Schedule 20-Min Walkthrough
+              </button>
             </div>
             <div className={styles.heroProof}>
               <span>✓ No credit card required</span>
@@ -51,25 +102,30 @@ export default function Home() {
             <div className={styles.probGrid}>
               <div>
                 <div className="label">The Problem</div>
-                <h2 className="sec-title">Healthcare Providers Are Drowning in Disconnected Systems</h2>
+                <h2 className="sec-title">
+                  Healthcare Providers Are Drowning in Disconnected Systems
+                </h2>
                 <p style={{ color: 'var(--tm)', fontSize: 15, lineHeight: 1.8, marginBottom: 24, maxWidth: 440 }}>
                   Your patient data lives in 5 places. Documentation takes hours. Revenue visibility is nonexistent. Staff coordination happens over WhatsApp.
                 </p>
-                <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--a1)', marginBottom: 24 }}>Alphatic solves this.</p>
+                <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--a1)', marginBottom: 24 }}>
+                  Alphatic solves this.
+                </p>
                 <Link href="/product" className="btn btn-o">See how it works →</Link>
               </div>
-              <div className={styles.probPoints}>
+
+              <div ref={probRef} className={styles.probPoints}>
                 {[
                   { icon: '📁', title: 'Patient data lives in 5 places', desc: 'Appointment, records, billing, imaging, pharmacy — all disconnected. Nobody has a complete picture.' },
                   { icon: '📝', title: 'Doctors drowning in paperwork', desc: "30–40% of a doctor's day is spent documenting. Not thinking. Not diagnosing. Not treating." },
                   { icon: '📉', title: 'Revenue visibility is month-end', desc: 'Clinic owners find out how much money they made when their accountant tells them.' },
                   { icon: '💬', title: 'Operations run on WhatsApp', desc: 'Staff on messaging apps. Inventory on paper. Supply runs out mid-procedure.' },
-                ].map(p => (
-                  <div key={p.title} className={styles.probItem}>
+                ].map((p, i) => (
+                  <div key={p.title} className={styles.probItem} style={{ animationDelay: `${i * 0.1}s` }}>
                     <span className={styles.probIcon}>{p.icon}</span>
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 3 }}>{p.title}</div>
-                      <div style={{ fontSize: 12, color: 'var(--tm)', lineHeight: 1.6 }}>{p.desc}</div>
+                      <div className={styles.probTitle}>{p.title}</div>
+                      <div className={styles.probDesc}>{p.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -82,7 +138,9 @@ export default function Home() {
         <section className="sec tc">
           <div className="wrap">
             <div className="label">The Core Difference</div>
-            <h2 className="sec-title" style={{ maxWidth: 620, margin: '0 auto 12px' }}>Not a Scheduling Tool. Not a Billing System.</h2>
+            <h2 className="sec-title" style={{ maxWidth: 620, margin: '0 auto 12px' }}>
+              Not a Scheduling Tool. Not a Billing System.
+            </h2>
             <p style={{ color: 'var(--tm)', maxWidth: 520, margin: '0 auto 48px', lineHeight: 1.75 }}>
               An operating system that connects clinical workflows, patient intelligence, revenue operations, and business analytics into one intelligent system.
             </p>
@@ -103,10 +161,6 @@ export default function Home() {
         {/* ── WHY ── */}
         <section className="sec sec-alt">
           <div className="wrap">
-            <div className="tc" style={{ marginBottom: 40 }}>
-              <div className="label">Why Providers Choose Alphatic</div>
-              <h2 className="sec-title">Four reasons that actually matter</h2>
-            </div>
             <div className={styles.whyGrid}>
               {WHY_ALPHATIC.map((w, i) => (
                 <div key={w.title} className={styles.whyCard}>
@@ -122,10 +176,6 @@ export default function Home() {
         {/* ── BEFORE / AFTER ── */}
         <section className="sec">
           <div className="wrap">
-            <div className="tc" style={{ marginBottom: 40 }}>
-              <div className="label">Outcomes</div>
-              <h2 className="sec-title">What Happens When You Deploy Alphatic</h2>
-            </div>
             <div className="card-flat" style={{ overflowX: 'auto' }}>
               <table className={styles.baTable}>
                 <thead>
@@ -148,26 +198,27 @@ export default function Home() {
 
         {/* ── DAY TIMELINE ── */}
         <section className="sec sec-alt">
-          <div className="wrap">
-            <div className="two-col">
-              <div>
-                <div className="label">A Day Running on Alphatic</div>
-                <h2 className="sec-title">From clinic open to EOD — nothing missed</h2>
-                <p style={{ color: 'var(--tm)', fontSize: 14, lineHeight: 1.8, marginTop: 14 }}>
-                  Every moment of your clinic's day flows through a single connected system. Real-time data at every step.
-                </p>
-              </div>
-              <div className={styles.timeline}>
-                {DAY_TIMELINE.map(d => (
-                  <div key={d.time} className={styles.timeItem}>
-                    <div className={styles.timeLabel}>{d.time}</div>
-                    <div className={styles.timeContent}>
-                      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{d.label}</div>
-                      <div style={{ fontSize: 12, color: 'var(--tm)', lineHeight: 1.65 }}>{d.text}</div>
-                    </div>
+          <div className="wrap" style={{ display: 'flex', gap: '40px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            {/* Section heading on left */}
+            <div className={styles.timelineHeading}>
+              <div className="label">A Day Running on Alphatic</div>
+              <h2 className="sec-title">From clinic open to EOD</h2>
+              <p style={{ color: 'var(--tm)', fontSize: 13, lineHeight: 2, marginTop: 12, maxWidth: 480 }}>
+                Every moment of your clinic's day flows through a single connected system. Real-time data at every step.
+              </p>
+            </div>
+
+            {/* Timeline cards */}
+            <div ref={timelineRef} className={styles.timeline}>
+              {DAY_TIMELINE.map((d, i) => (
+                <div key={d.time} className={styles.timeItem}>
+                  <div className={styles.timeLabel}>{d.time}</div>
+                  <div className={styles.timeContent}>
+                    <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 4 }}>{d.label}</div>
+                    <div style={{ fontSize: 11, color: 'var(--tm)', lineHeight: 1.5 }}>{d.text}</div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -175,10 +226,6 @@ export default function Home() {
         {/* ── TESTIMONIALS ── */}
         <section className="sec">
           <div className="wrap">
-            <div className="tc" style={{ marginBottom: 40 }}>
-              <div className="label">Social Proof</div>
-              <h2 className="sec-title">Already Running at Leading Providers</h2>
-            </div>
             <div className={styles.testiGrid}>
               {TESTIMONIALS.map(t => (
                 <div key={t.name} className={styles.testiCard}>

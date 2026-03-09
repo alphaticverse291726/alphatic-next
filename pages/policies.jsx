@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Navbar from '../components/Navbar'; // Import your Navbar
 
 const TABS = [
   { id: 'privacy', label: 'Privacy Policy' },
@@ -40,30 +41,76 @@ const CONTENT = {
 export default function Policies() {
   const router = useRouter();
   const [tab, setTab] = useState('privacy');
-  useEffect(() => { if (router.query.tab) setTab(router.query.tab); }, [router.query.tab]);
+
+  useEffect(() => {
+    if (router.query.tab) setTab(router.query.tab);
+  }, [router.query.tab]);
+
   const content = CONTENT[tab] || CONTENT.privacy;
+
+  // Open Tally Form in New Tab
+  const openTrial = () => {
+    if (typeof window !== 'undefined') {
+      window.open('https://tally.so/r/lbOeYp', '_blank');
+    }
+  };
+
   return (
     <>
-      <Head><title>Policies — Alphatic Labs</title></Head>
+      <Head>
+        <title>Policies — Alphatic Labs</title>
+      </Head>
+
+      {/* Navbar with Free Trial */}
+      <Navbar onTrial={openTrial} />
+
       <div className="page-enter">
+
+        {/* Hero / Page Header */}
         <section style={{ position: 'relative', padding: '100px 0 48px', overflow: 'hidden', background: 'var(--bg2)' }}>
           <div className="grid-bg" />
           <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
             <div className="label">Legal</div>
-            <h1 style={{ fontSize: 'clamp(26px,4vw,48px)', fontWeight: 800, marginBottom: 14 }}>Our <span className="grad-text">Policies</span></h1>
-            <p style={{ color: 'var(--tm)', fontSize: 16, maxWidth: 500, lineHeight: 1.7 }}>Full transparency on how we handle your data. Last updated: March 1, 2026.</p>
+            <h1 style={{ fontSize: 'clamp(26px,4vw,48px)', fontWeight: 800, marginBottom: 14 }}>
+              Our <span className="grad-text">Policies</span>
+            </h1>
+            <p style={{ color: 'var(--tm)', fontSize: 16, maxWidth: 500, lineHeight: 1.7 }}>
+              Full transparency on how we handle your data. Last updated: March 1, 2026.
+            </p>
           </div>
         </section>
+
+        {/* Policies Tabs & Content */}
         <section className="sec">
           <div className="wrap" style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 40, alignItems: 'start' }}>
+
+            {/* Tabs */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {TABS.map(t => (
-                <button key={t.id} onClick={() => setTab(t.id)}
-                  style={{ padding: '11px 16px', borderRadius: 10, fontSize: 13, fontWeight: 500, cursor: 'pointer', border: '1px solid', borderColor: tab === t.id ? 'var(--bdh)' : 'transparent', color: tab === t.id ? 'var(--a1)' : 'var(--tm)', background: tab === t.id ? 'var(--sf)' : 'none', textAlign: 'left', fontFamily: 'var(--ff-body)', transition: 'all .2s' }}>
+                <button
+                  key={t.id}
+                  onClick={() => setTab(t.id)}
+                  style={{
+                    padding: '11px 16px',
+                    borderRadius: 10,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    border: '1px solid',
+                    borderColor: tab === t.id ? 'var(--bdh)' : 'transparent',
+                    color: tab === t.id ? 'var(--a1)' : 'var(--tm)',
+                    background: tab === t.id ? 'var(--sf)' : 'none',
+                    textAlign: 'left',
+                    fontFamily: 'var(--ff-body)',
+                    transition: 'all .2s'
+                  }}
+                >
                   {t.label}
                 </button>
               ))}
             </div>
+
+            {/* Tab Content */}
             <div>
               <h2 style={{ fontFamily: 'var(--ff-disp)', fontSize: 26, fontWeight: 800, marginBottom: 28 }}>{content.title}</h2>
               {content.sections.map(s => (
@@ -73,8 +120,10 @@ export default function Policies() {
                 </div>
               ))}
             </div>
+
           </div>
         </section>
+
       </div>
     </>
   );

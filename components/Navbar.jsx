@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { NAV_LINKS, LEGAL_LINKS } from '../lib/data';
+import { NAV_LINKS } from '../lib/data';
 import styles from './Navbar.module.css';
 
-export default function Navbar({ onTrial }) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [legalOpen, setLegalOpen] = useState(false);
   const [theme, setTheme] = useState('dark');
   const router = useRouter();
 
@@ -16,10 +15,17 @@ export default function Navbar({ onTrial }) {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
+  // Open Tally Form in New Tab
+  const openTrial = () => {
+    if (typeof window !== 'undefined') {
+      window.open('https://tally.so/r/lbOeYp', '_blank');
+    }
+  };
+
   return (
     <nav className={styles.navbar} id="navbar">
       <div className={`wrap ${styles.inner}`}>
-        
+
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <span className={styles.logoMark}>α</span>
@@ -38,49 +44,6 @@ export default function Navbar({ onTrial }) {
               </Link>
             </li>
           ))}
-
-          {/* Legal dropdown */}
-          <li className={styles.ddWrap} onMouseLeave={() => setLegalOpen(false)}>
-            <button
-              className={styles.link}
-              onMouseEnter={() => setLegalOpen(true)}
-            >
-              Legal ▾
-            </button>
-
-            {legalOpen && (
-              <div className={styles.dropdown}>
-                {LEGAL_LINKS.map(l => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className={styles.ddItem}
-                    onClick={() => setLegalOpen(false)}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </li>
-
-          <li>
-            <Link
-              href="/donate"
-              className={`${styles.link} ${router.pathname === '/donate' ? styles.active : ''}`}
-            >
-              Donate
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/invest"
-              className={`${styles.link} ${router.pathname === '/invest' ? styles.active : ''}`}
-            >
-              Invest
-            </Link>
-          </li>
         </ul>
 
         {/* Actions */}
@@ -89,11 +52,11 @@ export default function Navbar({ onTrial }) {
             {theme === 'dark' ? '☀ Light' : '🌙 Dark'}
           </button>
 
-          <button className="btn btn-o btn-sm" onClick={onTrial}>
+          <button className="btn btn-o btn-sm" onClick={openTrial}>
             Walkthrough
           </button>
 
-          <button className="btn btn-p btn-sm" onClick={onTrial}>
+          <button className="btn btn-p btn-sm" onClick={openTrial}>
             Free Trial
           </button>
         </div>
@@ -122,32 +85,13 @@ export default function Navbar({ onTrial }) {
             </Link>
           ))}
 
-          <Link href="/donate" className={styles.mobLink} onClick={() => setMobileOpen(false)}>
-            Donate
-          </Link>
-
-          <Link href="/invest" className={styles.mobLink} onClick={() => setMobileOpen(false)}>
-            Invest
-          </Link>
-
-          {LEGAL_LINKS.map(l => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={styles.mobLink}
-              onClick={() => setMobileOpen(false)}
-            >
-              {l.label}
-            </Link>
-          ))}
-
           <div className={styles.mobActions}>
             <button
               className="btn btn-p"
               style={{ width: '100%', justifyContent: 'center' }}
               onClick={() => {
                 setMobileOpen(false);
-                onTrial();
+                openTrial();
               }}
             >
               Start Free Trial

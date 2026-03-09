@@ -1,8 +1,40 @@
+/* Existing CSS... */
 .header { position: relative; padding: 100px 0 48px; overflow: hidden; background: var(--bg2); }
 .plansGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
-.planCard { background: var(--sf); border: 1px solid var(--bd); border-radius: 18px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; transition: all .3s; }
-.planCard:hover { border-color: var(--bdh); }
-.highlight { border-color: var(--a1); background: linear-gradient(180deg, rgba(168,85,247,.06) 0%, var(--sf) 100%); box-shadow: 0 0 50px rgba(168,85,247,.12); }
+.planCard { 
+  background: var(--sf); 
+  border: 1px solid var(--bd); 
+  border-radius: 18px; 
+  padding: 28px 24px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
+  transition: all .3s; 
+  cursor: pointer;
+}
+.planCard:hover { 
+  border-color: var(--bdh); 
+  transform: translateY(-4px); 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.highlight { 
+  border-color: var(--a1); 
+  background: linear-gradient(180deg, rgba(168,85,247,.06) 0%, var(--sf) 100%); 
+  box-shadow: 0 0 50px rgba(168,85,247,.12); 
+}
+.selected {
+  border-color: var(--a1); 
+  background: linear-gradient(180deg, rgba(168,85,247,.1) 0%, var(--sf) 100%);
+  box-shadow: 0 0 60px rgba(168,85,247,.2);
+  transform: translateY(-4px);
+}
+
+/* Maintain hover effect on selected card too */
+.planCard.selected:hover {
+  box-shadow: 0 0 70px rgba(168,85,247,.25);
+}
+
+/* Badge, price, features, FAQ */
 .badge { align-self: flex-start; padding: 3px 10px; background: var(--glow); border: 1px solid var(--bdh); border-radius: 100px; font-size: 10px; font-weight: 700; color: var(--a1); text-transform: uppercase; letter-spacing: .06em; }
 .planName { font-family: var(--ff-disp); font-size: 20px; font-weight: 800; }
 .planPrice { display: flex; align-items: baseline; gap: 4px; }
@@ -13,4 +45,7 @@
 .faqQ { display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 15px; }
 .faqIco { font-size: 20px; color: var(--a1); flex-shrink: 0; margin-left: 14px; }
 .faqA { margin-top: 10px; font-size: 13px; color: var(--tm); line-height: 1.7; }
-@media (max-width: 960px) { .plansGrid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+
+@media (max-width: 960px) { 
+  .plansGrid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } 
+}

@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { SPECS, SPEC_KEYS } from '../lib/data';
 import styles from '../styles/Product.module.css';
 
-const openTrial = () => typeof window !== 'undefined' && window.dispatchEvent(new Event('open-trial'));
+// Open Tally form in a new tab
+const openTrial = () => {
+  if (typeof window !== 'undefined') {
+    window.open('https://tally.so/r/lbOeYp', '_blank');
+  }
+};
 
 export default function Product() {
   const [curSpec, setCurSpec] = useState('dental');
@@ -62,7 +67,6 @@ export default function Product() {
                     <p style={{ color: 'var(--tm)', fontSize: 14, lineHeight: 1.85, marginBottom: 24 }}>{spec.tagline}</p>
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                       <button className="btn btn-p btn-lg" onClick={openTrial}>Start 30-Day Free Trial</button>
-                      <button className="btn btn-o btn-lg" onClick={openTrial}>Schedule Walkthrough</button>
                     </div>
                   </div>
                   <div className={styles.featGrid}>
