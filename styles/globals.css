@@ -20,19 +20,18 @@
   --ff-body: sans-serif;
 }
 
-
 [data-theme="light"] {
-  --bg: #F7F3FF;
-  --bg2: #EDE5FF;
-  --sf: #fff;
-  --sf2: #F3EDFF;
-  --bd: rgba(168, 85, 247, 0.12);
-  --bdh: rgba(168, 85, 247, 0.35);
-  --tx: #1A0A2E;
-  --tm: #5B4880;
-  --td: #9B8AB8;
-  --glow: rgba(168, 85, 247, 0.06);
-  --glowb: rgba(168, 85, 247, 0.14);
+  --bg: #F7F3FF;       /* main background remains light */
+  --bg2: #E6DFF8;      /* slightly darker than original for sections */
+  --sf: #F1E8FF;       /* cards slightly darker */
+  --sf2: #E8DBFF;      /* secondary card/section background */
+  --bd: rgba(168, 85, 247, 0.15);   /* border slightly more visible */
+  --bdh: rgba(168, 85, 247, 0.40);
+  --tx: #2A1A4F;       /* main text darker */
+  --tm: #4B3670;       /* medium text darker */
+  --td: #7A65A5;       /* disabled/text-muted slightly darker */
+  --glow: rgba(168, 85, 247, 0.08);
+  --glowb: rgba(168, 85, 247, 0.18);
 }
 
 [data-grad="blue"] {
@@ -321,3 +320,4 @@ button {
     padding: 0 18px;
   }
 }
+

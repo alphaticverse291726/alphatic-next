@@ -22,7 +22,7 @@ export default function Blog() {
             <h1 style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 800, marginBottom: 14 }}>
               Healthcare Technology <span className="grad-text">Insights</span>
             </h1>
-            <p style={{ color: 'var(--tm)', fontSize: 16, maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--tm)', fontSize: 16, maxWidth: 620, margin: '0 auto', lineHeight: 1.7 }}>
               Deep dives on EHR, EMR, CDM, AI in healthcare, and the future of specialty software in India.
             </p>
           </div>
@@ -41,7 +41,7 @@ export default function Blog() {
             className="wrap"
             style={{
               display: 'flex',
-              gap: 12,
+              gap: 30,
               overflowX: 'auto',
               justifyContent: 'center', // center horizontally
               padding: '0 8px', // small padding on sides for scroll
@@ -52,7 +52,7 @@ export default function Blog() {
                 key={cat}
                 onClick={() => setActiveCat(cat)}
                 style={{
-                  padding: '8px 16px',
+                  padding: '8px 26px',
                   borderRadius: 8,
                   border: '1px solid',
                   borderColor: activeCat === cat ? 'var(--a1)' : 'var(--bd)',
@@ -72,7 +72,7 @@ export default function Blog() {
 
         {/* Blog Posts */}
         <section className="sec">
-          <div className="wrap" style={{ maxWidth: 800 }}>
+          <div className="wrap" style={{ maxWidth: 500 }}>
             {filteredPosts.length === 0 ? (
               <p style={{ color: 'var(--tm)', fontSize: 14 }}>No posts found in this category.</p>
             ) : filteredPosts.map((post, i) => (
