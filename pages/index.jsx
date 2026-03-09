@@ -59,9 +59,14 @@ export default function Home() {
       </Head>
 
       <div className="page-enter">
+
         {/* ── HERO ── */}
         <section className={styles.hero}>
           <div className="grid-bg" />
+
+          {/* AUTO BACKGROUND ANIMATION */}
+          <div className="heroAutoGlow" />
+
           <div className={styles.heroGlow} />
           <div className="wrap">
             <div className="label">
@@ -200,35 +205,55 @@ Built for dental. Expanding to OBGYN, Cardiology, and 5 more specialties. Live i
         </section>
 
         {/* ── DAY TIMELINE ── */}
-        <section className="sec sec-alt">
-          <div className="wrap" style={{ display: 'flex', gap: '40px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-            {/* Section heading on left */}
-            <div className={styles.timelineHeading}>
-              <div className="label">A Day Running on Alphatic</div>
-              <h2 className="sec-title">From clinic open to EOD</h2>
-              <p style={{ color: 'var(--tm)', fontSize: 13, lineHeight: 2, marginTop: 12, maxWidth: 480 }}>
-                Every moment of your clinic's day flows through a single connected system. Real-time data at every step.
-              </p>
-            </div>
+        <h2 style={{fontWeight: 2000, textAlign:'center', paddingBottom:18}}>
+                  A Day In Alphatic Labs
+                </h2>
+        
+        <div className={styles.roadmapWrap}>
 
-            {/* Timeline cards */}
-            <div ref={timelineRef} className={styles.timeline}>
-              {DAY_TIMELINE.map((d, i) => (
-                <div key={d.time} className={styles.timeItem}>
-                  <div className={styles.timeLabel}>{d.time}</div>
-                  <div className={styles.timeContent}>
-                    <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 4 }}>{d.label}</div>
-                    <div style={{ fontSize: 11, color: 'var(--tm)', lineHeight: 1.5 }}>{d.text}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+{DAY_TIMELINE.map((d,i)=>(
+        
+<div key={d.time} className={styles.roadmapItem}>
+
+<div className={styles.roadCircle}>
+
+<div className={styles.pulseCircle}></div>
+<div className={`${styles.pulseCircle} ${styles.pulseCircleDelay}`}></div>
+
+<div className={styles.roadIcon}>
+⏱
+</div>
+
+</div>
+
+<div className={styles.roadContent}>
+
+<div className={styles.roadTime}>
+{d.time}
+</div>
+
+<div className={styles.roadTitle}>
+{d.label}
+</div>
+
+<div className={styles.roadDesc}>
+{d.text}
+</div>
+
+</div>
+
+</div>
+
+))}
+
+</div>
 
         {/* ── TESTIMONIALS ── */}
         <section className="sec">
           <div className="wrap">
+            <h2 style={{fontWeight: 2000, textAlign:'center', paddingBottom:18, paddingTop:20}}>
+                  Testimonials
+                </h2>
             <div className={styles.testiGrid}>
               {TESTIMONIALS.map(t => (
                 <div key={t.name} className={styles.testiCard}>
@@ -267,6 +292,7 @@ Built for dental. Expanding to OBGYN, Cardiology, and 5 more specialties. Live i
             </div>
           </div>
         </section>
+
       </div>
     </>
   );

@@ -67,102 +67,135 @@
 .baImpact { color: var(--a1) !important; font-size: 11px !important; }
 
 /* Timeline container */
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 12px; /* space between cards */
-  position: relative;
-  padding-left: 30px; /* space for vertical line */
+
+
+/* ROADMAP */
+
+.roadmapWrap{
+max-width:900px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:50px;
+position:relative;
+}
+/* vertical roadmap line */
+
+.roadmapWrap::before{
+content:"";
+position:absolute;
+left:40px;
+top:0;
+bottom:0;
+width:2px;
+background:linear-gradient(
+to bottom,
+rgba(255,255,255,.2),
+rgba(0,0,0,.45),
+rgba(255,255,255,.1)
+);
 }
 
-/* Vertical line immediately left of cards */
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 105px;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  background: var(--bdh);
+.roadmapItem{
+display:flex;
+gap:28px;
+align-items:flex-start;
+position:relative;
 }
 
-/* Timeline card */
-.timeItem {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: relative;
-  background: var(--sf);
-  border: 1px solid var(--bd);
-  border-radius: 12px;
-  padding: 20px 14px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  font-size: 12px;
-  margin-left: 40px; /* push card to the right of the line */
+.roadCircle{
+position:relative;
+width:80px;
+height:80px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
 }
 
-/* Dot with label */
-/* Timeline card pushed further right for more space from label */
-.timeItem {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: relative;
-  background: var(--sf);
-  border: 1px solid var(--bd);
-  border-radius: 12px;
-  padding: 10px 14px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  font-size: 12px;
-  margin-left: 40px; /* increased from 20px to 40px */
+.roadIcon{
+width:60px;
+height:60px;
+border-radius:50%;
+background:linear-gradient(
+135deg,
+#ffffff,
+#dcdcdc,
+#f3f3f3
+);
+box-shadow:
+0 10px 25px rgba(0,0,0,.45),
+inset 0 2px 6px rgba(255,255,255,.5);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+z-index:2;
 }
 
-/* Dot stays in place relative to label */
-.timeLabel {
-  font-family: var(--ff-disp);
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--a1);
-  position: absolute;
-  left: -90px; /* keep label position */
-  top: 15px;
-  width: 90px;
-  text-align: left;
+.pulseCircle{
+position:absolute;
+width:70px;
+height:70px;
+border-radius:50%;
+border:2px solid rgba(255,255,255,.3);
+animation:pulse 3s infinite;
 }
 
-.timeLabel::after {
-  content: '';
-  position: absolute;
-  right: -5px; /* keeps gap from label to dot */
-  top: 0;
-  width: 10px;
-  height: 10px;
-  background: var(--a1);
-  border-radius: 50%;
-  border: 2px solid var(--sf);
-  transition: all 0.3s ease;
+.pulseCircleDelay{
+animation-delay:1.5s;
 }
 
-/* Card hover effect */
-.timeItem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
+@keyframes pulse{
+
+0%{
+transform:scale(.6);
+opacity:.8;
 }
 
-.timeItem:hover .timeLabel::after {
-  width: 16px;
-  height: 16px;
-  background: var(--grad);
+70%{
+transform:scale(1.6);
+opacity:0;
 }
 
-/* Section heading on left */
-.timelineHeading {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
+100%{
+opacity:0;
 }
+
+}
+
+.roadContent{
+background:linear-gradient(
+135deg,
+rgba(255,255,255,.05),
+rgba(0,0,0,.45)
+);
+padding:20px 24px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,.45);
+max-width:600px;
+}
+
+.roadTime{
+font-size:12px;
+font-weight:700;
+color:var(--a1);
+margin-bottom:6px;
+}
+
+.roadTitle{
+font-size:14px;
+font-weight:700;
+margin-bottom:6px;
+}
+
+.roadDesc{
+font-size:12px;
+color:var(--tm);
+line-height:1.6;
+}
+
+
 
 .testiGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
 .testiCard { background: var(--sf); border: 1px solid var(--bd); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
