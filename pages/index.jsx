@@ -73,8 +73,11 @@ export default function Home() {
               and Hospitals
             </h1>
             <p className={styles.heroDesc}>
-              One platform. Every clinical, operational, and financial function.<br />
-              Built for specialists. Deployed to 50+ live clinics today.
+              One platform. Every clinical, operational, and financial workflow — connected, automated, and intelligent.
+            </p>
+            <p className={styles.heroDesc}>
+              Alphatic Labs is the only clinic management platform in India that combines AI-powered clinical documentation, real-time business intelligence, complete patient lifecycle management, and end-to-end billing in a single integrated system.
+Built for dental. Expanding to OBGYN, Cardiology, and 5 more specialties. Live in 50+ clinics today.
             </p>
             <div className={styles.heroBtns}>
               <button className="btn btn-p btn-lg" onClick={openTrial}>
@@ -106,7 +109,7 @@ export default function Home() {
                   Healthcare Providers Are Drowning in Disconnected Systems
                 </h2>
                 <p style={{ color: 'var(--tm)', fontSize: 15, lineHeight: 1.8, marginBottom: 24, maxWidth: 440 }}>
-                  Your patient data lives in 5 places. Documentation takes hours. Revenue visibility is nonexistent. Staff coordination happens over WhatsApp.
+                  The average dental clinic in India operates across paper records, WhatsApp threads, disconnected billing tools, and manual spreadsheets. The result? Revenue leakage, patient attrition, clinical risk, and zero real-time visibility. Alphatic Labs eliminates all of it.
                 </p>
                 <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--a1)', marginBottom: 24 }}>
                   Alphatic solves this.
@@ -116,10 +119,10 @@ export default function Home() {
 
               <div ref={probRef} className={styles.probPoints}>
                 {[
-                  { icon: '📁', title: 'Patient data lives in 5 places', desc: 'Appointment, records, billing, imaging, pharmacy — all disconnected. Nobody has a complete picture.' },
-                  { icon: '📝', title: 'Doctors drowning in paperwork', desc: "30–40% of a doctor's day is spent documenting. Not thinking. Not diagnosing. Not treating." },
-                  { icon: '📉', title: 'Revenue visibility is month-end', desc: 'Clinic owners find out how much money they made when their accountant tells them.' },
-                  { icon: '💬', title: 'Operations run on WhatsApp', desc: 'Staff on messaging apps. Inventory on paper. Supply runs out mid-procedure.' },
+                  { icon: '📁', title: 'Fragmented Patient Data', desc: 'Patient data lives in five places — appointment software, physical records, billing sheets, X-ray files, and the doctor memory. Nobody has a complete picture. Alphatic unifies it all into one structured, searchable, AI-ready profile.' },
+                  { icon: '📝', title: 'Doctors Buried in Paperwork', desc: "30–40% of every doctor's day is spent on documentation — writing notes, filling forms, updating records. That time belongs to patients. Alphatic's AI documentation pipeline gives it back." },
+                  { icon: '📉', title: 'Revenue Visibility Is Month-End', desc: 'Clinic owners find out how much money they made when their accountant tells them — four weeks later. Alphatic delivers real-time revenue, collections, and profitability data the moment it happens.' },
+                  { icon: '💬', title: 'Operations Run on WhatsApp', desc: 'Staff coordination on messaging apps. Inventory tracked on paper. Appointments confirmed by phone. Supplies run out mid-procedure. Alphatic replaces every one of these with structured, automated workflows.' },
                 ].map((p, i) => (
                   <div key={p.title} className={styles.probItem} style={{ animationDelay: `${i * 0.1}s` }}>
                     <span className={styles.probIcon}>{p.icon}</span>
@@ -139,10 +142,10 @@ export default function Home() {
           <div className="wrap">
             <div className="label">The Core Difference</div>
             <h2 className="sec-title" style={{ maxWidth: 620, margin: '0 auto 12px' }}>
-              Not a Scheduling Tool. Not a Billing System.
+              Not a Scheduling Tool. Not a Billing System. An Operating System.
             </h2>
             <p style={{ color: 'var(--tm)', maxWidth: 520, margin: '0 auto 48px', lineHeight: 1.75 }}>
-              An operating system that connects clinical workflows, patient intelligence, revenue operations, and business analytics into one intelligent system.
+              Alphatic Labs connects every function of your clinic — clinical documentation, patient records, scheduling, billing, inventory, staff management, and analytics — into one unified, AI-powered platform. Everything talks to everything. Every action creates structured data. Every data point feeds intelligence back into your decisions.
             </p>
             <div className={styles.capsGrid}>
               {CAPABILITIES.map(c => (
@@ -254,7 +257,7 @@ export default function Home() {
                   Stop Running Clinics on<br /><span className="grad-text">Spreadsheets and WhatsApp</span>
                 </h2>
                 <p style={{ color: 'var(--tm)', fontSize: 16, maxWidth: 440, margin: '0 auto 32px', lineHeight: 1.7 }}>
-                  Start your free 30-day trial. No credit card. No commitment. Full access. Onboarding team included.
+                  Join 50+ clinics that made the shift to structured, intelligent, real-time clinic operations. Your 30-day free trial includes full platform access and a dedicated onboarding team to get you live in days.
                 </p>
                 <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
                   <button className="btn btn-p btn-lg" onClick={openTrial}>Start Free Trial</button>

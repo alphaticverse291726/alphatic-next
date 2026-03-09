@@ -26,10 +26,10 @@ export default function Product() {
           <div className="wrap tc" style={{ position: 'relative', zIndex: 1 }}>
             <div className="label"><span className="dot" />Platform</div>
             <h1 style={{ fontSize: 'clamp(28px,4.5vw,50px)', fontWeight: 800, marginBottom: 14 }}>
-              The Complete OS for <span className="grad-text">Healthcare</span>
+              Every Module Your Clinic Needs. <span className="grad-text">One Platform.</span>
             </h1>
             <p style={{ color: 'var(--tm)', fontSize: 16, maxWidth: 500, margin: '0 auto 24px', lineHeight: 1.7 }}>
-              One platform. Specialty-specific workflows. Every clinical, operational, and financial function.
+              From the moment a patient walks in to the moment they pay and return — Alphatic manages every step, connects every function, and turns every action into structured intelligence.
             </p>
 
             {/* Spec Tabs */}
